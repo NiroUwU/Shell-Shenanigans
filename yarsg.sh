@@ -17,15 +17,18 @@
 # VARIABLES
 # ------------------------------------------------------------------------------
 
+launch=$1
+
 # Enemy
-enemyHP=20
+enemyHPmax=20
+enemyHP=$enemyHPmax
 enemyAtk=""
 
 # Player
-playerHP=25
+playerHPmax=25
+playerHP=$playerHPmax
 playerStamina=20
 pleayerPotions=3
-playerAtk=""
 
 
 # Attacks
@@ -46,16 +49,6 @@ playerHeal=7
 # FUNCTIONS
 # ------------------------------------------------------------------------------
 
-function playerAlive() {
-	if (( playerHP > 0 )); then return 1
-	else return 0; fi
-}
-
-function enemyAlive() {
-	if (( enemyHP > 0 )); then return 1
-	else return 0; fi
-}
-
 function actionPick() {
 	while true; do
 		echo $enemyAtk
@@ -63,12 +56,15 @@ function actionPick() {
 		printf " >> "
 		read input
 		if (( input == 3 & pleayerPotions <= 0 )); then
+			# No potions
 			clear
 			echo "!!! - You dont have enough potions to heal yourself! - !!!"
 		elif (( input == 1 | input == 2 | input == 3 )); then
+			# Action
 			action $input
 			break
 		else
+			# Bad input
 			clear
 			echo "!!! - Please put in only 1, 2 or 3 - !!!"
 		fi
@@ -78,27 +74,33 @@ function actionPick() {
 function action() {
 	case $1 in
 		1)
+			# Light Attack
 			playerStamina=$(( playerStamina - playerLightCost ))
 			enemyHP=$(( enemyHP - playerLightDMG ))
 			break
-			;;
+		;;
 
 		2)
+			# Heavy Attack
 			playerStamina=$(( playerStamina - playerHeavyCost ))
 			enemyHP=$(( enemyHP - playerHeavyDMG ))
 			break
-			;;
+		;;
 
 		3)
+			# Heal
 			playerHP=$(( playerHP + playerHeal ))
 			pleayerPotions=$(( pleayerPotions - 1 ))
+			# Dont go over max HP thingy
+			if (( playerHP > playerHPmax )); then playerHP=$playerHPmax; fi
 			break
-			;;
+		;;
 
 		*)
 			echo "if you see this, some error accured :("
 			break
-			;;
+		;;
+
 	esac
 }
 
@@ -124,8 +126,8 @@ function enemy_attack() {
 }
 
 function fight_print() {
-	echo "HP  Enemy: " $enemyHP
-	echo "HP Player: " $playerHP "  Stamina: " $playerStamina
+	echo "HP  Enemy: " $enemyHP"/"$enemyHPmax
+	echo "HP Player: " $playerHP"/"$playerHPmax"  Stamina: " $playerStamina
 	echo
 	echo "	Type 1 for a light attack:" "  -  DMG:" $playerLightDMG " - Stamina Cost:" $playerLightCost
 	echo "	Type 2 for heavy attack:  " "  -  DMG:" $playerHeavyDMG " - Stamina Cost:" $playerHeavyCost
@@ -193,10 +195,14 @@ function welcome() {
 	echo "      Yet Another RPG Style Game      "
 	echo "         a simple game by niro        "
 	echo "                                      "
-	echo "   <press enter to start the game>    "
+	echo "    <press enter to start the game>   "
 	echo "                                      "
  	printf " > > "
  	read start
+}
+
+function helpScreen() {
+	echo \-\e "This is the help screen!"\\\n"Here you will find general information about the game:"
 }
 
 
@@ -205,26 +211,36 @@ function welcome() {
 # MAIN LOOP
 # ------------------------------------------------------------------------------
 
-# Welcome screen
-welcome
+case $launch in
+	h)
+		helpScreen
+	;;
 
-while true; do
-	clear
-	# Player Attack, Stamina Check Enemy Alive Check
-	actionPick
-	if (( playerStamina < 0 )); then
-		loseScreen
-		break
-	fi
-	if (( enemyHP <= 0 )); then
-		winScreen
-		break
-	fi
+	*)
+		# Welcome screen
+		welcome
 
-	# Enemy Attack and Player Alive Check
-	enemy_attack
-	if (( playerHP <= 0 )); then
-		loseScreen
-		break
-	fi
-done
+		while true; do
+			clear
+			# Player Attack, Stamina Check, Enemy Alive Check
+			actionPick
+			if (( playerStamina < 0 )); then
+				loseScreen
+				break
+			fi
+			if (( enemyHP <= 0 )); then
+				winScreen
+				break
+			fi
+
+			# Enemy Attack and Player Alive Check
+			sleep 0.2
+			enemy_attack
+			if (( playerHP <= 0 )); then
+				loseScreen
+				break
+			fi
+		done
+	;;
+
+esac
