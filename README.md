@@ -6,3 +6,6 @@ This repository houses my shell scripts i wrote. Not all of them will be useful,
 ## YARSG (Yet Another RPG Style Game)
 YARSG is a simple text based rpg game.
 It is poorly balanced and isn't too much fun, but it was a fun challenge to write the code :)
+
+## Truth-O-Meter
+The truth-o-meter script is a script that allows to return a rasndom truthness value of a certain string.
