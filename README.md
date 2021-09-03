@@ -15,3 +15,8 @@ A small script for automating rolling dice in Dungeons and Dragons - because why
 It has two modes:
   * #### Roll - roll a 4, 6, 8, 10, 12, or 20-sided die
   * #### Freeroll - roll any-sided dice you want, doesn't matter if it's physically possible to even have such a dice irl
+  
+* ## Blackjack
+The famous gambling game blackjack - what else can i add?
+This script - technically "these scripts" - are experimental one, being made out of multiple scripts with one supervisor script.
+IMPORTANT: Please only execute the "blackjack.sh" script in the main folder to avoid unexpected results!
