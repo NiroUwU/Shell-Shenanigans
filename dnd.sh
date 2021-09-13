@@ -1,7 +1,9 @@
 # VARIABLES
 
+#  Tells the program what exactly to do
 operation=$1
 validRoll=( 4 6 8 10 12 20 )
+
 
 
 
@@ -28,10 +30,37 @@ function roll() {
 
 	for (( i = 0; i < $dice; i++ )); do
 		roll=$[ $RANDOM % $sides + 1 ]
+		
 		printf $roll"  "
-	done
 
-	echo ""
+		# Roll Stats
+		rollStats calculate
+	done
+	echo -e ""\\\n
+
+	# Prints stats of die roll / dice rolls
+	rollStats print
+}
+
+function rollStats() {
+	local actionStats=$1
+	local side=$2
+
+	case $actionStats in
+		calculate)
+			#  Sum of all sides
+			sum=$(( sum + roll ))
+			;;
+
+		print)
+			echo -e "Roll Statistics:"\\\n"Sum of all rolls: "$sum
+			;;
+
+		*)
+			echo -e "ERROR on rollStats() function. Invalid operation."
+			;;
+
+	esac
 }
 
 function errorRoll() {
@@ -58,6 +87,9 @@ if [[ $operation == "-h" || $operation == "--help" ]]; then
 elif [[ $operation == "-r" || $operation == "--roll" || $operation = "-fr" || $operation == "--froll" || $operation == "--freeroll" ]]; then
 	dice=$2
 	sides=$3
+
+	#  Roll "stats"
+	sum=0
 
 	if [[ $dice > 0 && $sides > 0 && $dice =~ ^[0-9]+$ && $sides =~ ^[0-9]+$ ]]; then
 		# Froll / Roll decide
@@ -88,3 +120,5 @@ else
 	# Error on operation
 	errorOperation
 fi
+
+exit 0

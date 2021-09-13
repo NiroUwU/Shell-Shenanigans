@@ -1,5 +1,5 @@
 # Shell-Shenanigans Info
-This repository houses my shell scripts i wrote. Not all of them will be useful, but maybe you will find something that interests you :)
+This repository houses my bash shell scripts i wrote. Not all of them will be useful, but maybe you will find something that interests you :)
 
 
 # Description of all files
@@ -20,3 +20,4 @@ It has two modes:
 The famous gambling game blackjack - what else can i add?
 This script - technically "these scripts" - are experimental one, being made out of multiple scripts with one supervisor script.
 IMPORTANT: Please only execute the "blackjack.sh" script in the main folder to avoid unexpected results!
+
