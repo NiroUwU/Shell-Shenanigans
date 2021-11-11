@@ -11,11 +11,11 @@ IMPORTANT: Please only execute the "blackjack.sh" script in the main folder to a
 
 
 * ## DnD Roll
-A small script for automating rolling dice in Dungeons and Dragons - because why not?
-
 It has two modes:
   * #### Roll - roll a 4, 6, 8, 10, 12, or 20-sided die
   * #### Freeroll - roll any-sided dice you want, doesn't matter if it's physically possible to even have such a dice irl
+A small script for automating rolling dice in Dungeons and Dragons - because why not?
+
 
 
 * ## Jarun
