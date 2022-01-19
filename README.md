@@ -18,6 +18,11 @@ It has two modes:
   * #### Freeroll - roll any-sided dice you want, doesn't matter if it's physically possible to even have such a dice irl
 
 
+## Gay Minecraft Text
+I was bored, so i created a script that converts a string to a rainbow colour-coded string to post in your minecraft chats.
+
+Thank me later :)
+
 
 ## Jarun
 This script compiles a .java file to a .class file and runs it. If you provide a second parameter, the script will delete the .class file after being run.
