@@ -152,7 +152,7 @@ function aliasrc_update() {
 	local backup_time=$(date +%Y-%m-%d_%H:%M:%S)
 	local backup_name="$PATH_backup/aliasrc.backupfrom_$backup_time"
 
-	(echo -e "$OLD" > "/amogus.txt" && echo -e "Backed up current aliasrc to '$backup_name'.") || printf "WARNING: Backup failed, do you wish to proceed anyways? [y/N] " && askForConsent
+	(echo -e "$OLD" > "$backup_name" && echo -e "Backed up current aliasrc to '$backup_name'.") || printf "WARNING: Backup failed, do you wish to proceed anyways? [y/N] " && askForConsent
 	if [[ ! $consent == 1 ]]; then return; fi
 	
 	(echo "$NEW" > $PATH_aliasrc) && (echo "Update complete. (Re)source aliasrc or restart session to apply new changes.")
