@@ -4,6 +4,9 @@ This repository houses my bash shell scripts i wrote. Not all of them will be us
 
 # Description of all files
 
+## Aliasrc
+The script i am using to manage my aliases. Feel free to try it out :)
+
 ## Blackjack
 The famous gambling game blackjack - what else can i add?
 This script - technically "these scripts" - are experimental one, being made out of multiple scripts with one supervisor script.
