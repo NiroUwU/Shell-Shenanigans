@@ -124,7 +124,7 @@ function aliasrc_update() {
 		fi
 	}
 	# Aliasrc source:
-	local repository="NiroUwU/Shell-Shenanigans/main/aliasrc"
+	local repository="NiroUwU/aliasrc/main/aliasrc"
 	local update_url="https://raw.githubusercontent.com/$repository"
 
 	local NEW=$(curl $update_url)        || return
@@ -162,3 +162,5 @@ function aliasrc_update() {
 cmd "aliashelp" aliashelp "Displays help information about added aliases."
 cmd "clearaliascache" "rm $PATH_cache/*.alias && rm $PATH_backup/*.backup*" "Clears cached alias files in '$PATH_cache'."
 cmd "aliasrc_update" aliasrc_update "Updates aliasrc, if new version is available."
+
+echo -e "Aliasrc Repository was moved. Please update your copy of aliasrc with the command 'aliasrc_update'!"
